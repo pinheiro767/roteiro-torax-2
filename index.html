@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1f3a" />
+  <meta name="description" content="Roteiro prático interativo de Anatomia Topográfica do Tórax — artérias, nervos e veias." />
+  <title>Roteiro Prático — Anatomia Topográfica do Tórax</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bubble-field" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <header class="hero">
+    <div class="hero__glow"></div>
+    <div class="hero__content">
+      <div class="eyebrow">PWA • Anatomia Humana</div>
+      <h1>Roteiro Prático</h1>
+      <p class="hero__subtitle">Anatomia Topográfica do Tórax</p>
+      <div class="hero__chips">
+        <span>G1 • Artérias e Nervos</span>
+        <span>G2 • Veias</span>
+        <span id="structureCount">105 estruturas</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="control-panel glass" aria-label="Controles do roteiro">
+      <label class="search-box">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="search" placeholder="Buscar estrutura anatômica…" autocomplete="off" />
+      </label>
+
+      <div class="toolbar">
+        <button id="showAllBtn" class="soft-btn secondary" type="button">Mostrar imagens</button>
+        <button id="hideAllBtn" class="soft-btn secondary" type="button">Ocultar imagens</button>
+        <button id="pdfBtn" class="soft-btn primary" type="button">Gerar PDF</button>
+        <button id="installBtn" class="soft-btn install" type="button" hidden>Instalar app</button>
+      </div>
+
+      <label class="pdf-option">
+        <input id="includeHiddenInPdf" type="checkbox" />
+        <span>Incluir também imagens ocultas no PDF</span>
+      </label>
+      <p class="microcopy">As imagens anexadas pelos alunos ficam salvas neste dispositivo/navegador. O PDF é gerado localmente.</p>
+    </section>
+
+    <nav class="group-tabs glass" aria-label="Grupos do roteiro">
+      <button class="group-tab active" data-group="ALL" type="button">Todos</button>
+      <button class="group-tab" data-group="G1" type="button">G1 — Artérias e Nervos</button>
+      <button class="group-tab" data-group="G2" type="button">G2 — Veias</button>
+    </nav>
+
+    <section id="content" class="content" aria-live="polite"></section>
+
+    <div id="emptyState" class="empty-state glass" hidden>
+      <div class="empty-state__icon">⌕</div>
+      <h2>Nenhuma estrutura encontrada</h2>
+      <p>Tente outro termo ou volte para “Todos”.</p>
+    </div>
+  </main>
+
+  <div id="zoomModal" class="zoom-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visualização ampliada da imagem">
+    <div class="zoom-modal__topbar">
+      <div>
+        <strong id="zoomTitle">Imagem</strong>
+        <span id="zoomCounter"></span>
+      </div>
+      <button id="zoomClose" class="icon-btn" type="button" aria-label="Fechar zoom">×</button>
+    </div>
+    <div id="zoomStage" class="zoom-stage">
+      <img id="zoomImage" alt="Imagem ampliada" draggable="false" />
+    </div>
+    <div class="zoom-controls glass">
+      <button id="zoomOut" class="icon-btn" type="button" aria-label="Diminuir zoom">−</button>
+      <input id="zoomRange" type="range" min="1" max="4" step="0.1" value="1" aria-label="Nível de zoom" />
+      <button id="zoomIn" class="icon-btn" type="button" aria-label="Aumentar zoom">+</button>
+      <button id="zoomReset" class="soft-btn secondary compact" type="button">Ajustar</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="app.js"></script>
+</body>
+</html>
